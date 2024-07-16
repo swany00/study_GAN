@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>study_GAN</title>
+<title>quarto-input249e0de7b3bc4b22 – study_GAN</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,27 +20,59 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<script src="site_libs/quarto-listing/list.min.js"></script>
-<script src="site_libs/quarto-listing/quarto-listing.js"></script>
-<script src="site_libs/quarto-html/quarto.js"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -68,77 +100,19 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
-<script>
 
-  window.document.addEventListener("DOMContentLoaded", function (_event) {
-    const listingTargetEl = window.document.querySelector('#listing-listing .list');
-    if (!listingTargetEl) {
-      // No listing discovered, do not attach.
-      return; 
-    }
 
-    const options = {
-      valueNames: ['listing-title','listing-author','listing-image','listing-description','listing-categories',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
-      
-      searchColumns: ["listing-title","listing-author","listing-image","listing-description","listing-categories"],
-    };
-
-    window['quarto-listings'] = window['quarto-listings'] || {};
-    window['quarto-listings']['listing-listing'] = new List('listing-listing', options);
-
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  });
-
-  window.addEventListener('hashchange',() => {
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  })
-  </script>
-
-  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
-
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN") {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script>
-
-<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="../../styles.css">
 </head>
 
-<body class="nav-fixed">
+<body class="nav-fixed fullcontent">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top quarto-banner">
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="./index.html">
+    <a class="navbar-brand" href="../../index.html">
     <span class="navbar-title">study_GAN</span>
     </a>
   </div>
@@ -149,7 +123,7 @@ window.Quarto = {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
-    <a class="nav-link" href="./about.html"> 
+    <a class="nav-link" href="../../about.html"> 
 <span class="menu-text">About</span></a>
   </li>  
   <li class="nav-item compact">
@@ -170,115 +144,86 @@ window.Quarto = {
     </nav>
 </header>
 <!-- content -->
-<header id="title-block-header" class="quarto-title-block default page-columns page-full">
-  <div class="quarto-title-banner page-columns page-full">
-    <div class="quarto-title column-page-left">
-      <h1 class="title">study_GAN</h1>
-                      </div>
-  </div>
-    
-  
-  <div class="quarto-title-meta column-page-left">
-
-      
-    
-      
-    </div>
-    
-  
-  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
-    <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">All <span class="quarto-category-count">(3)</span></div></div></div>
+    
 <!-- main -->
-<main class="content quarto-banner-title-block column-page-left" id="quarto-document-content">
+<main class="content quarto-banner-title-block" id="quarto-document-content">
 
 
 
 
+<div id="cell-0" class="cell" data-execution_count="1">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># BIG TRANSFER(BiT):</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="cell-1" class="cell" data-execution_count="3">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">#General Visual Representation Learning</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="co">#일반적인 목적으로 쉽게 사용가능한 이미지 분야에서 사용가능한 </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="cell-2" class="cell" data-execution_count="4">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co">#학습된 모델을 받아서 파인튜닝 혹은 transfer learning을 이용해 좋은 성능을 얻으 낼 수 있다.</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a> </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="cell-3" class="cell" data-execution_count="5">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>내용요약</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>전이학습을 이용한 성공적인 수행방법을 소개하고 있다.</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>결과를 먼저 봤을때 데이터 세트의 크기가 작을 때에도 매우 높은 정확도를 보인다.</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-error">
+<div class="ansi-escaped-output">
+<pre><span class="ansi-cyan-fg">  Cell </span><span class="ansi-green-fg">In[5], line 3</span>
+<span class="ansi-red-fg">    전이학습을 이용한 성공적인 수행방법을 소개하고 있다.</span>
+          ^
+<span class="ansi-red-fg">SyntaxError</span><span class="ansi-red-fg">:</span> invalid syntax
+</pre>
+</div>
+</div>
+</div>
+<div id="cell-4" class="cell" data-execution_count="6">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>큰 크기의 data로 사전학습된 cnn을 불러와서 </span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-error">
+<div class="ansi-escaped-output">
+<pre><span class="ansi-cyan-fg">  Cell </span><span class="ansi-green-fg">In[6], line 1</span>
+<span class="ansi-red-fg">    큰 크기의 data로 사전학습된 cnn을 불러와서</span>
+      ^
+<span class="ansi-red-fg">SyntaxError</span><span class="ansi-red-fg">:</span> invalid syntax
+</pre>
+</div>
+</div>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="전이학습_files/figure-html/cell-5-1-image.png" class="img-fluid figure-img"></p>
+<figcaption>image.png</figcaption>
+</figure>
+</div>
+<p>크기가 큰 데이터 Da데이터를 학습시키면 feature extraction(특징추출)의 가중치 A<code>를 얻을 수 있다. 우리가 실험하려는 데이터 Db를 학습시킬때 기존 학습된 A</code>에 파인튜닝하면 좋은 결과를 얻을 수 있다. 이때. 데이터의 출력물에 맞게 마지막 부분의 fc레이어를 수정해야한다.</p>
+<p>결과는 괜찮다.</p>
+<p>프리징방식 파인튜닝방식</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="전이학습_files/figure-html/cell-8-1-image.png" class="img-fluid figure-img"></p>
+<figcaption>image.png</figcaption>
+</figure>
+</div>
+<p>1)프리징방식</p>
+<p>앞부분의 레이어를 얼려서 학습하지 않고, 마지막 레이어만 학습하는 방식으로 우리가 가진 작은 데이터들의 오차까지 학습시키지 않기 때문에 오버피팅으로 부터는 자유롭다.</p>
+<p>2)미세조정 fine tuning</p>
+<p>앞부분의 레이어까지도 학습하는 방식이다. 전이학습에서 보통 미세조정 방식을 많이 쓰기때문에 용어를 혼동해서 쓰기도 한다.</p>
+<p>사전학습된 모델을 이용해 실제로 풀고자 하는 문제를 downstream task라고 한다. downstream은 비교적 비용이 적게 든다.</p>
+<section id="배치정규화" class="level1">
+<h1>배치정규화</h1>
+<p>배치정규화는 레이어의 입력에 대해서 정규화를 진행하며, 잘 알려진 장점은 다음과 같다. 2. input layer를 배치정규화 하는이유는 평균값 0 가중치 1이기때문에 가중치 초기화에 대한 부담감이 적고 좋은 정확도 마찬가지로 피쳐들도 히든레이어에 들어가기 전에 배치정규화를 해준다면 가중치 초기화에 대한 민감도가 감소될 것이다. 3. 전반적으로 수렴속도가 빨라지기 때문에 학습 속도도 빨라진다. 4. 모델의 일반화 효과가 있어 정확도가 향상되는 경향이 있다.</p>
+<p>구현원리는 감마와 베타 이 두개의 파라미터로 구현된다.</p>
+<p>식 :</p>
 
 
+</section>
 
-
-
-<div class="quarto-listing quarto-listing-container-default" id="listing-listing">
-<div class="list quarto-listing-default">
-<div class="quarto-post image-right" data-index="0" data-listing-file-modified-sort="1720759167167">
-<div class="thumbnail">
-<p><a href="./posts/GAN/그림그린도화지.html" class="no-external"></a></p><a href="./posts/GAN/그림그린도화지.html" class="no-external">
-<p class="card-img-top"><img src="posts/GAN/그림그린도화지_files/figure-html/cell-3-output-1.png"  class="thumbnail-image card-img"/></p>
-</a><p><a href="./posts/GAN/그림그린도화지.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/GAN/그림그린도화지.html" class="no-external"></a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/GAN/그림그린도화지.html" class="no-external"></a>
-</div>
-<div class="listing-description">
-<a href="./posts/GAN/그림그린도화지.html" class="no-external">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="im">import</span> matplotlib.font_manager</span>
-<span id="cb1-2">font_list <span class="op">=</span> matplotlib.font_manager.findSystemFonts(fontpaths<span class="op">=</span><span class="va">None</span>, fontext<span class="op">=</span><span class="st">'ttf'</span>)</span>
-<span id="cb1-3">[matplotlib.font_manager.FontProperties(fname<span class="op">=</span>font).get_nam…<span class="cf"></span><span class="kw"></span><span class="cf"></span><span class="st"></span><span class="kw"></span></span><span id="cb1-4"><span class="op"></span></span><span id="cb1-5"><span class="im"></span><span class="im"></span></span><span id="cb1-6"><span class="st"></span><span class="op"></span><span class="st"></span></span><span id="cb1-7"><span class="op"></span></span><span id="cb1-8"><span class="im"></span><span class="im"></span></span><span id="cb1-9"><span class="st"></span><span class="op"></span><span class="va"></span></span></code></pre></div></a>
-</div>
-</div>
-<div class="metadata">
-<p><a href="./posts/GAN/그림그린도화지.html" class="no-external"></a></p><a href="./posts/GAN/그림그린도화지.html" class="no-external">
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="1" data-listing-file-modified-sort="1721091577976" data-listing-reading-time-sort="3" data-listing-word-count-sort="531">
-<div class="thumbnail">
-<p><a href="./posts/GAN/GAN.html" class="no-external"></a></p><a href="./posts/GAN/GAN.html" class="no-external">
-<p class="card-img-top"><img src="posts/GAN/img/데이터셋.png"  class="thumbnail-image card-img"/></p>
-</a><p><a href="./posts/GAN/GAN.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/GAN/GAN.html" class="no-external">GAN</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/GAN/GAN.html" class="no-external"></a>
-</div>
-<div class="listing-description">
-<a href="./posts/GAN/GAN.html" class="no-external">generate의 모델이 train데이터의 분포를 학습하는 것이 목표이다.</a>
-</div>
-</div>
-<div class="metadata">
-<p><a href="./posts/GAN/GAN.html" class="no-external"></a></p><a href="./posts/GAN/GAN.html" class="no-external">
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="2" data-listing-file-modified-sort="1720416985131" data-listing-reading-time-sort="1" data-listing-word-count-sort="142">
-<div class="thumbnail">
-<p><a href="./posts/GAN/전이학습.html" class="no-external"></a></p><a href="./posts/GAN/전이학습.html" class="no-external">
-<p class="card-img-top"><img src="posts/GAN/전이학습_files/figure-html/cell-5-1-image.png"  class="thumbnail-image card-img"/></p>
-</a><p><a href="./posts/GAN/전이학습.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/GAN/전이학습.html" class="no-external">배치정규화</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/GAN/전이학습.html" class="no-external"></a>
-</div>
-<div class="listing-description">
-<a href="./posts/GAN/전이학습.html" class="no-external">크기가 큰 데이터 Da데이터를 학습시키면 feature extraction(특징추출)의 가중치 A<code>를 얻을 수 있다. 우리가 실험하려는 데이터 Db를 학습시킬때 기존 학습된 A</code>에 파인튜닝하면 좋은 결과를 얻을 수 있다. 이때. 데이터의 출력물에 맞게 마지막 부분의 fc레이어를 수정해야한다.</a>
-</div>
-</div>
-<div class="metadata">
-<p><a href="./posts/GAN/전이학습.html" class="no-external"></a></p><a href="./posts/GAN/전이학습.html" class="no-external">
-</a>
-</div>
-</div>
-</div>
-<div class="listing-no-matching d-none">
-No matching items
-</div>
-</div></main> <!-- /main -->
+</main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
