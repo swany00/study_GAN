@@ -6,6 +6,8 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="김수환">
+<meta name="dcterms.date" content="2024-01-02">
 
 <title>GAN – study_GAN</title>
 <style>
@@ -154,7 +156,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   
   <div class="quarto-title-meta">
 
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p>김수환 </p>
+            </div>
+    </div>
       
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">January 2, 2024</p>
+      </div>
+    </div>
     
       
     </div>
@@ -171,10 +185,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 
+<section id="gan" class="level1">
+<h1>GAN</h1>
 <p>generate의 모델이 train데이터의 분포를 학습하는 것이 목표이다.</p>
 <section id="기본지식" class="level3">
 <h3 class="anchored" data-anchor-id="기본지식">기본지식</h3>
-<p>확률변수 : 확률 변수란 특정한 값을 가진 확률을 나타내는 함수를 의미한다. ex)주사위의 확률 변수 1/6 1) 이산확률분포 : 확률변수 x의 개수를 정확히 셀 수 있을때의 분포 ex)주사위는 1/6 2) 연속확률분포 : 각각의 사건들의 값이 연속적이라고 하면 정규분포처럼 모델링 가능하다. ex)달리기 기록, IQ 값</p>
+<p>확률변수 : 확률 변수란 특정한 값을 가진 확률을 나타내는 함수를 의미한다. ex)주사위의 확률 변수 1/6</p>
+<ol type="1">
+<li><p>이산확률분포 : 확률변수 x의 개수를 정확히 셀 수 있을때의 분포 ex)주사위는 1/6</p></li>
+<li><p>연속확률분포 : 각각의 사건들의 값이 연속적이라고 하면 정규분포처럼 모델링 가능하다. ex)달리기 기록, IQ 값</p></li>
+</ol>
 </section>
 <section id="데이터로-보는-gan의-목적확률분포를-비슷하게-만들어라" class="level3">
 <h3 class="anchored" data-anchor-id="데이터로-보는-gan의-목적확률분포를-비슷하게-만들어라">데이터로 보는 gan의 목적(확률분포를 비슷하게 만들어라)</h3>
@@ -205,9 +225,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <code>빨간색</code>은 모델이 생성한 <code>64*64*3</code>의 픽셀의 데이터의 분포이다.</p>
 <p>즉. Generative Adversarial모델의 목표는 두게의 격차를 좁히는 것이다.</p>
 </section>
+</section>
 <section id="gan-generative-adversarial-networks" class="level1">
 <h1>GAN ( Generative Adversarial Networks )</h1>
-<p>목차 1) 직관적인 해석 2) 수식으로 해석 3) code로 해석</p>
+<p>목차<br>
+1) 직관적인 해석<br>
+2) 수식으로 해석<br>
+3) code로 해석</p>
 <section id="직관적인-해석" class="level2">
 <h2 class="anchored" data-anchor-id="직관적인-해석">1) 직관적인 해석</h2>
 <div class="quarto-figure quarto-figure-center">
@@ -297,15 +321,6 @@ D(x)값의 범위는 0~1사이의 값이다. 즉 logD(x)에 적용되면 D(x)가
 <figcaption>alt text</figcaption>
 </figure>
 </div>
-<p>#생성모델 : 있을법한 이미지(사진, 오디오 등등)을 생성하는 모델 ㄴ 각각의 분포를 학습해서 생성해 내는것이다.</p>
-<p>확률분포를 잘 학습했다면 확률값이 높은 부분에서 이미지를 샘플링하면 그럴사한 이미지를 얻어 낼 수있고 확률값이 낮은 부분에서 이미지를 샘플링하면 별로인 이미지를 만들어 간다.</p>
-<p>이미지 생성모델의 목표는 이미지 데이터의 분포를 근사하는 모델 G를만드는거이 생성 모델의 분포와 비슷하게 만드는것이 목표이다.</p>
-<p>모델 G가 잘 학습되었다고 한다면 통계적으로 평균적인 특징을 가지는 데이터를 쉽게 생성할 수 있다.</p>
-</section>
-<section id="gan" class="level2">
-<h2 class="anchored" data-anchor-id="gan">GAN</h2>
-<p>generator 생성자 + 판별자</p>
-<p>(1)데이터 세트에서 하나의 이미지를 뽑은 뒤에 로그를 취해서 평균값을 구하겠다는 뜻이다. (2)생성자의 개념이 포함되어있다. 노이즈벡터로부터 새로운 이미지를 만들 수 있다. pz는 노이즈를 샘플링할 수있는 분포가 되는것이고 이 노이즈들 중 하나를 뽑아서 생성자 G에 넣어서 가짜이미지를 만든다음에 d에 넣은 값에 -를</p>
 
 
 </section>

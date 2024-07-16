@@ -6,8 +6,10 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="김수환">
+<meta name="dcterms.date" content="2024-01-02">
 
-<title>quarto-inputf83251a005f609da – study_GAN</title>
+<title>전이학습 – study_GAN</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -144,7 +146,35 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     </nav>
 </header>
 <!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">전이학습</h1>
+                      </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p>김수환 </p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">January 2, 2024</p>
+      </div>
+    </div>
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
     
@@ -154,49 +184,24 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 
-<div id="cell-0" class="cell" data-execution_count="1">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># BIG TRANSFER(BiT):</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+<section id="big-transferbit-전이학습" class="level1">
+<h1>BIG TRANSFER(BiT): 전이학습</h1>
+<div id="cell-2" class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">#General Visual Representation Learning</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co">#일반적인 목적으로 쉽게 사용가능한 이미지 분야에서 사용가능한 </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="cell-1" class="cell" data-execution_count="3">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">#General Visual Representation Learning</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="co">#일반적인 목적으로 쉽게 사용가능한 이미지 분야에서 사용가능한 </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="cell-3" class="cell" data-execution_count="4">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">#학습된 모델을 받아서 파인튜닝 혹은 transfer learning을 이용해 좋은 성능을 얻으 낼 수 있다.</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a> </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="cell-2" class="cell" data-execution_count="4">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co">#학습된 모델을 받아서 파인튜닝 혹은 transfer learning을 이용해 좋은 성능을 얻으 낼 수 있다.</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a> </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div id="cell-3" class="cell" data-execution_count="5">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>내용요약</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>전이학습을 이용한 성공적인 수행방법을 소개하고 있다.</span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>결과를 먼저 봤을때 데이터 세트의 크기가 작을 때에도 매우 높은 정확도를 보인다.</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-error">
-<div class="ansi-escaped-output">
-<pre><span class="ansi-cyan-fg">  Cell </span><span class="ansi-green-fg">In[5], line 3</span>
-<span class="ansi-red-fg">    전이학습을 이용한 성공적인 수행방법을 소개하고 있다.</span>
-          ^
-<span class="ansi-red-fg">SyntaxError</span><span class="ansi-red-fg">:</span> invalid syntax
-</pre>
-</div>
-</div>
-</div>
-<div id="cell-4" class="cell" data-execution_count="6">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>큰 크기의 data로 사전학습된 cnn을 불러와서 </span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-error">
-<div class="ansi-escaped-output">
-<pre><span class="ansi-cyan-fg">  Cell </span><span class="ansi-green-fg">In[6], line 1</span>
-<span class="ansi-red-fg">    큰 크기의 data로 사전학습된 cnn을 불러와서</span>
-      ^
-<span class="ansi-red-fg">SyntaxError</span><span class="ansi-red-fg">:</span> invalid syntax
-</pre>
-</div>
-</div>
-</div>
+<p>내용요약</p>
+<p>전이학습을 이용한 성공적인 수행방법을 소개하고 있다.</p>
+<p>결과를 먼저 봤을때 데이터 세트의 크기가 작을 때에도 매우 높은 정확도를 보인다.</p>
+<p>큰 크기의 data로 사전학습된 cnn을 불러와서</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="전이학습_files/figure-html/cell-5-1-image.png" class="img-fluid figure-img"></p>
+<p><img src="전이학습_files/figure-html/cell-6-1-image.png" class="img-fluid figure-img"></p>
 <figcaption>image.png</figcaption>
 </figure>
 </div>
@@ -205,7 +210,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>프리징방식 파인튜닝방식</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="전이학습_files/figure-html/cell-8-1-image.png" class="img-fluid figure-img"></p>
+<p><img src="전이학습_files/figure-html/cell-9-1-image.png" class="img-fluid figure-img"></p>
 <figcaption>image.png</figcaption>
 </figure>
 </div>
@@ -214,11 +219,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>2)미세조정 fine tuning</p>
 <p>앞부분의 레이어까지도 학습하는 방식이다. 전이학습에서 보통 미세조정 방식을 많이 쓰기때문에 용어를 혼동해서 쓰기도 한다.</p>
 <p>사전학습된 모델을 이용해 실제로 풀고자 하는 문제를 downstream task라고 한다. downstream은 비교적 비용이 적게 든다.</p>
+</section>
 <section id="배치정규화" class="level1">
 <h1>배치정규화</h1>
 <p>배치정규화는 레이어의 입력에 대해서 정규화를 진행하며, 잘 알려진 장점은 다음과 같다. 2. input layer를 배치정규화 하는이유는 평균값 0 가중치 1이기때문에 가중치 초기화에 대한 부담감이 적고 좋은 정확도 마찬가지로 피쳐들도 히든레이어에 들어가기 전에 배치정규화를 해준다면 가중치 초기화에 대한 민감도가 감소될 것이다. 3. 전반적으로 수렴속도가 빨라지기 때문에 학습 속도도 빨라진다. 4. 모델의 일반화 효과가 있어 정확도가 향상되는 경향이 있다.</p>
 <p>구현원리는 감마와 베타 이 두개의 파라미터로 구현된다.</p>
-<p>식 :</p>
 
 
 </section>

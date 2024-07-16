@@ -9,14 +9,14 @@
   {
     "objectID": "posts/GAN/전이학습.html",
     "href": "posts/GAN/전이학습.html",
-    "title": "배치정규화",
+    "title": "전이학습",
     "section": "",
-    "text": "# BIG TRANSFER(BiT):\n\n\n#General Visual Representation Learning\n#일반적인 목적으로 쉽게 사용가능한 이미지 분야에서 사용가능한 \n\n\n#학습된 모델을 받아서 파인튜닝 혹은 transfer learning을 이용해 좋은 성능을 얻으 낼 수 있다.\n \n\n\n내용요약\n\n전이학습을 이용한 성공적인 수행방법을 소개하고 있다.\n\n결과를 먼저 봤을때 데이터 세트의 크기가 작을 때에도 매우 높은 정확도를 보인다.\n\n\n  Cell In[5], line 3\n    전이학습을 이용한 성공적인 수행방법을 소개하고 있다.\n          ^\nSyntaxError: invalid syntax\n\n\n\n\n\n큰 크기의 data로 사전학습된 cnn을 불러와서 \n\n\n\n  Cell In[6], line 1\n    큰 크기의 data로 사전학습된 cnn을 불러와서\n      ^\nSyntaxError: invalid syntax\n\n\n\n\n\n\n\nimage.png\n\n\n크기가 큰 데이터 Da데이터를 학습시키면 feature extraction(특징추출)의 가중치 A를 얻을 수 있다. 우리가 실험하려는 데이터 Db를 학습시킬때 기존 학습된 A에 파인튜닝하면 좋은 결과를 얻을 수 있다. 이때. 데이터의 출력물에 맞게 마지막 부분의 fc레이어를 수정해야한다.\n결과는 괜찮다.\n프리징방식 파인튜닝방식\n\n\n\nimage.png\n\n\n1)프리징방식\n앞부분의 레이어를 얼려서 학습하지 않고, 마지막 레이어만 학습하는 방식으로 우리가 가진 작은 데이터들의 오차까지 학습시키지 않기 때문에 오버피팅으로 부터는 자유롭다.\n2)미세조정 fine tuning\n앞부분의 레이어까지도 학습하는 방식이다. 전이학습에서 보통 미세조정 방식을 많이 쓰기때문에 용어를 혼동해서 쓰기도 한다.\n사전학습된 모델을 이용해 실제로 풀고자 하는 문제를 downstream task라고 한다. downstream은 비교적 비용이 적게 든다.\n\n배치정규화\n배치정규화는 레이어의 입력에 대해서 정규화를 진행하며, 잘 알려진 장점은 다음과 같다. 2. input layer를 배치정규화 하는이유는 평균값 0 가중치 1이기때문에 가중치 초기화에 대한 부담감이 적고 좋은 정확도 마찬가지로 피쳐들도 히든레이어에 들어가기 전에 배치정규화를 해준다면 가중치 초기화에 대한 민감도가 감소될 것이다. 3. 전반적으로 수렴속도가 빨라지기 때문에 학습 속도도 빨라진다. 4. 모델의 일반화 효과가 있어 정확도가 향상되는 경향이 있다.\n구현원리는 감마와 베타 이 두개의 파라미터로 구현된다.\n식 :"
+    "text": "BIG TRANSFER(BiT): 전이학습\n\n#General Visual Representation Learning\n#일반적인 목적으로 쉽게 사용가능한 이미지 분야에서 사용가능한 \n\n\n#학습된 모델을 받아서 파인튜닝 혹은 transfer learning을 이용해 좋은 성능을 얻으 낼 수 있다.\n \n\n내용요약\n전이학습을 이용한 성공적인 수행방법을 소개하고 있다.\n결과를 먼저 봤을때 데이터 세트의 크기가 작을 때에도 매우 높은 정확도를 보인다.\n큰 크기의 data로 사전학습된 cnn을 불러와서\n\n\n\nimage.png\n\n\n크기가 큰 데이터 Da데이터를 학습시키면 feature extraction(특징추출)의 가중치 A를 얻을 수 있다. 우리가 실험하려는 데이터 Db를 학습시킬때 기존 학습된 A에 파인튜닝하면 좋은 결과를 얻을 수 있다. 이때. 데이터의 출력물에 맞게 마지막 부분의 fc레이어를 수정해야한다.\n결과는 괜찮다.\n프리징방식 파인튜닝방식\n\n\n\nimage.png\n\n\n1)프리징방식\n앞부분의 레이어를 얼려서 학습하지 않고, 마지막 레이어만 학습하는 방식으로 우리가 가진 작은 데이터들의 오차까지 학습시키지 않기 때문에 오버피팅으로 부터는 자유롭다.\n2)미세조정 fine tuning\n앞부분의 레이어까지도 학습하는 방식이다. 전이학습에서 보통 미세조정 방식을 많이 쓰기때문에 용어를 혼동해서 쓰기도 한다.\n사전학습된 모델을 이용해 실제로 풀고자 하는 문제를 downstream task라고 한다. downstream은 비교적 비용이 적게 든다.\n\n\n배치정규화\n배치정규화는 레이어의 입력에 대해서 정규화를 진행하며, 잘 알려진 장점은 다음과 같다. 2. input layer를 배치정규화 하는이유는 평균값 0 가중치 1이기때문에 가중치 초기화에 대한 부담감이 적고 좋은 정확도 마찬가지로 피쳐들도 히든레이어에 들어가기 전에 배치정규화를 해준다면 가중치 초기화에 대한 민감도가 감소될 것이다. 3. 전반적으로 수렴속도가 빨라지기 때문에 학습 속도도 빨라진다. 4. 모델의 일반화 효과가 있어 정확도가 향상되는 경향이 있다.\n구현원리는 감마와 베타 이 두개의 파라미터로 구현된다."
   },
   {
     "objectID": "posts/GAN/그림그린도화지.html",
     "href": "posts/GAN/그림그린도화지.html",
-    "title": "study_GAN",
+    "title": "그림 그릴때 참고",
     "section": "",
     "text": "import matplotlib.font_manager\nfont_list = matplotlib.font_manager.findSystemFonts(fontpaths=None, fontext='ttf')\n[matplotlib.font_manager.FontProperties(fname=font).get_name() for font in font_list if 'Nanum' in font]\n\\\nimport matplotlib.pyplot as plt\nplt.rc('font', family='NanumGothicCoding')\n\\\nimport matplotlib as mpl\nmpl.rcParams['axes.unicode_minus'] = False\n\n\nimport matplotlib.pyplot as plt\nimport numpy as np\nfrom scipy.signal import find_peaks\n\n# Define the x range\nx = np.linspace(1, 8, 1000)\n\n# Define a function that adds moderate wiggles\ndef complex_function(x):\n    return np.exp(-0.2 * x) * (np.sin(2 * x) + 0.5 * np.sin(5 * x) + np.cos(3 * x))\n\n# Compute y values\ny = complex_function(x)\n\n# Find peaks\npeaks, _ = find_peaks(y)\n\n# Create the plot\nplt.figure(figsize=(10, 5))\nplt.plot(x, y, label='$p_{data}(x)$')\n\n# Plot peaks with labels\nplt.plot(x[peaks], y[peaks], 'ro', markersize=8, label='Peaks')\n\n# Add labels manually\nplt.text(x[peaks[0]], y[peaks[0]], '흑발의 여성', fontsize=12, ha='center', va='bottom')\nplt.text(x[peaks[1]], y[peaks[1]], '안경쓴 남성', fontsize=12, ha='center', va='bottom')\nplt.text(x[peaks[2]], y[peaks[2]], '금발의 여성', fontsize=12, ha='center', va='bottom')\n\n# Remove x and y ticks\nplt.xticks([])\nplt.yticks([])\n\n\n\n# Display the plot\nplt.show()\n\n\n\n\n\n\n\n\n\nimport matplotlib.pyplot as plt\nimport numpy as np\nfrom scipy.signal import find_peaks\n\n# Define the x range\nx = np.linspace(1, 8, 1000)\n\n# Define a function that adds moderate wiggles\ndef complex_function(x):\n    return np.exp(-0.2 * x) * (np.sin(2 * x) + 0.5 * np.sin(5 * x) + np.cos(3 * x))\n\n# Compute y values\ny = complex_function(x)\n\n# Find peaks\npeaks, _ = find_peaks(y)\n\n# Create the plot\nplt.figure(figsize=(10, 5))\n\n# Plot the original function\nplt.plot(x, y, label='$p_{data}(x)$')\n\n# Plot the shifted red graph\nplt.plot(x + 0.5, y, 'r-', alpha=0.5, label='Shifted $p_{data}(x)$')\n\n# Remove red peaks\n#plt.plot(x[peaks], y[peaks], 'ro', markersize=8)  # Don't include label here\n\n# Add labels manually (if needed)\n# plt.text(x[peaks[0]], y[peaks[0]], '흑발의 여성', fontsize=12, ha='center', va='bottom')\n# plt.text(x[peaks[1]], y[peaks[1]], '안경쓴 남성', fontsize=12, ha='center', va='bottom')\n# plt.text(x[peaks[2]], y[peaks[2]], '금발의 여성', fontsize=12, ha='center', va='bottom')\n\n# Remove x and y ticks\nplt.xticks([])\nplt.yticks([])\n\nplt.legend(labels=['정답데이터의 분포', '모델이 생성한 데이터 분포'], loc='upper right', fontsize=12,  shadow=True, frameon=True, framealpha=0.8, facecolor='lightyellow', edgecolor='blue')\n\n\n\n# Add grid for better readability\nplt.grid(True)\n\n# Display the plot\nplt.show()"
   },
@@ -25,7 +25,7 @@
     "href": "posts/GAN/GAN.html",
     "title": "GAN",
     "section": "",
-    "text": "generate의 모델이 train데이터의 분포를 학습하는 것이 목표이다."
+    "text": "generate의 모델이 train데이터의 분포를 학습하는 것이 목표이다.\n\n\n확률변수 : 확률 변수란 특정한 값을 가진 확률을 나타내는 함수를 의미한다. ex)주사위의 확률 변수 1/6\n\n이산확률분포 : 확률변수 x의 개수를 정확히 셀 수 있을때의 분포 ex)주사위는 1/6\n연속확률분포 : 각각의 사건들의 값이 연속적이라고 하면 정규분포처럼 모델링 가능하다. ex)달리기 기록, IQ 값\n\n\n\n\n이미지 같은 경우에는 많은 픽셀로 구성되어있고 채널도 3개씩있다. 고차원이라고 해도 통계적인 평균치가 존재할 수 있고 모델은 이를 수치적을 표현할 수 있게된다.\n\n\n\nalt text\n\n\n다음과 같이 64643 shape의 서양인 얼굴 데이터 셋이 있다고 하자\n\n\n\nalt text\n\n\n실제 이미지의 확률밀도함수가 있을때 이러한 1차원의 그래프의 형태를 띈다고 가정을 하겠다.(실제로는 굉장한 고차원의 벡터이다.)\n서양 사람 얼굴데이터세트에서 금발의 여성데이터셋이 가장 많다고 했을때 금발의 여성에 해당하는 벡터의 확률밀도 값이 가장크고 그다음 흑발의 여성이 큰 것을 알 수 있다. 반면 안경을 낀 남자의 데이터가 작다고 했을때 해당하는 벡터의 확률 밀도값은 상대적으로 작게 나타난다.\n만약 사람의 이미지가 아니거나 깨진이미지 같은 경우는 안경쓴 남성보다 작은 값의 확률 밀도를 갖게 될 것이다.\n\n\n\nalt text\n\n\n파란색은 원래의 64*64*3의 픽셀의 데이터의 분포이고\n빨간색은 모델이 생성한 64*64*3의 픽셀의 데이터의 분포이다.\n즉. Generative Adversarial모델의 목표는 두게의 격차를 좁히는 것이다."
   },
   {
     "objectID": "posts/GAN/GAN.html#직관적인-해석",
@@ -53,20 +53,13 @@
     "href": "posts/GAN/GAN.html#몇가지-참고사항",
     "title": "GAN",
     "section": "몇가지 참고사항",
-    "text": "몇가지 참고사항\n\n** log(1-D(G(z)))를 최소화하는 것이 아닌 log(D(G(z)))를 최대화 해야하는 이유 **\nG는 초반에 형편없는 이미지를 만들게 되고 D에 넣었을 때 당연히 거짓이라고 확신하기 때문에 결과 값이 0에 가깝게 나타난다.\n0에 가까운 결과값을 log함수에 넣게되면 기울기가 작게 나타나게 된다.(아래 1번 그래프 참고)\nG의 형편없는 그림을 학습하는 상황을 빨리 벗어나기 위해서는 기울기를 크게 나타나야 한다.(아래 2번 그래프 처럼)\n기울기를 크게 해주기위해서는 식을 log(1-x)를 최소화 하는것이 아닌 log(x)를 최대화하는 것으로 바꾸는 것이다.\n\n\n\n\nalt text\n\n\n#생성모델 : 있을법한 이미지(사진, 오디오 등등)을 생성하는 모델 ㄴ 각각의 분포를 학습해서 생성해 내는것이다.\n확률분포를 잘 학습했다면 확률값이 높은 부분에서 이미지를 샘플링하면 그럴사한 이미지를 얻어 낼 수있고 확률값이 낮은 부분에서 이미지를 샘플링하면 별로인 이미지를 만들어 간다.\n이미지 생성모델의 목표는 이미지 데이터의 분포를 근사하는 모델 G를만드는거이 생성 모델의 분포와 비슷하게 만드는것이 목표이다.\n모델 G가 잘 학습되었다고 한다면 통계적으로 평균적인 특징을 가지는 데이터를 쉽게 생성할 수 있다."
-  },
-  {
-    "objectID": "posts/GAN/GAN.html#gan",
-    "href": "posts/GAN/GAN.html#gan",
-    "title": "GAN",
-    "section": "GAN",
-    "text": "GAN\ngenerator 생성자 + 판별자\n(1)데이터 세트에서 하나의 이미지를 뽑은 뒤에 로그를 취해서 평균값을 구하겠다는 뜻이다. (2)생성자의 개념이 포함되어있다. 노이즈벡터로부터 새로운 이미지를 만들 수 있다. pz는 노이즈를 샘플링할 수있는 분포가 되는것이고 이 노이즈들 중 하나를 뽑아서 생성자 G에 넣어서 가짜이미지를 만든다음에 d에 넣은 값에 -를"
+    "text": "몇가지 참고사항\n\n** log(1-D(G(z)))를 최소화하는 것이 아닌 log(D(G(z)))를 최대화 해야하는 이유 **\nG는 초반에 형편없는 이미지를 만들게 되고 D에 넣었을 때 당연히 거짓이라고 확신하기 때문에 결과 값이 0에 가깝게 나타난다.\n0에 가까운 결과값을 log함수에 넣게되면 기울기가 작게 나타나게 된다.(아래 1번 그래프 참고)\nG의 형편없는 그림을 학습하는 상황을 빨리 벗어나기 위해서는 기울기를 크게 나타나야 한다.(아래 2번 그래프 처럼)\n기울기를 크게 해주기위해서는 식을 log(1-x)를 최소화 하는것이 아닌 log(x)를 최대화하는 것으로 바꾸는 것이다.\n\n\n\n\nalt text"
   },
   {
     "objectID": "index.html",
     "href": "index.html",
     "title": "study_GAN",
     "section": "",
-    "text": "GAN\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n배치정규화\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nNo matching items"
+    "text": "그림 그릴때 참고\n\n\n\n\n\n\n\n\n\n\n\nJan 2, 2024\n\n\n김수환\n\n\n\n\n\n\n\n\n\n\n\n\nGAN\n\n\n\n\n\n\n\n\n\n\n\nJan 2, 2024\n\n\n김수환\n\n\n\n\n\n\n\n\n\n\n\n\n전이학습\n\n\n\n\n\n\n\n\n\n\n\nJan 2, 2024\n\n\n김수환\n\n\n\n\n\n\nNo matching items"
   }
 ]

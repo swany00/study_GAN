@@ -78,9 +78,9 @@ ul.task-list li input[type="checkbox"] {
     }
 
     const options = {
-      valueNames: ['listing-title','listing-author','listing-image','listing-description','listing-categories',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
+      valueNames: ['listing-date','listing-title','listing-author','listing-image','listing-description','listing-categories',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
       
-      searchColumns: ["listing-title","listing-author","listing-image","listing-description","listing-categories"],
+      searchColumns: ["listing-date","listing-title","listing-author","listing-image","listing-description","listing-categories"],
     };
 
     window['quarto-listings'] = window['quarto-listings'] || {};
@@ -205,7 +205,7 @@ window.Quarto = {
 
 <div class="quarto-listing quarto-listing-container-default" id="listing-listing">
 <div class="list quarto-listing-default">
-<div class="quarto-post image-right" data-index="0" data-listing-file-modified-sort="1720759167167">
+<div class="quarto-post image-right" data-index="0" data-listing-date-sort="1704153600000" data-listing-file-modified-sort="1721092225633" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="1">
 <div class="thumbnail">
 <p><a href="./posts/GAN/그림그린도화지.html" class="no-external"></a></p><a href="./posts/GAN/그림그린도화지.html" class="no-external">
 <p class="card-img-top"><img src="posts/GAN/그림그린도화지_files/figure-html/cell-3-output-1.png"  class="thumbnail-image card-img"/></p>
@@ -213,7 +213,7 @@ window.Quarto = {
 </div>
 <div class="body">
 <h3 class="no-anchor listing-title">
-<a href="./posts/GAN/그림그린도화지.html" class="no-external"></a>
+<a href="./posts/GAN/그림그린도화지.html" class="no-external">그림 그릴때 참고</a>
 </h3>
 <div class="listing-subtitle">
 <a href="./posts/GAN/그림그린도화지.html" class="no-external"></a>
@@ -226,11 +226,17 @@ window.Quarto = {
 </div>
 </div>
 <div class="metadata">
-<p><a href="./posts/GAN/그림그린도화지.html" class="no-external"></a></p><a href="./posts/GAN/그림그린도화지.html" class="no-external">
+<a href="./posts/GAN/그림그린도화지.html" class="no-external">
+<div class="listing-date">
+Jan 2, 2024
+</div>
+<div class="listing-author">
+김수환
+</div>
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="1" data-listing-file-modified-sort="1721091577976" data-listing-reading-time-sort="3" data-listing-word-count-sort="531">
+<div class="quarto-post image-right" data-index="1" data-listing-date-sort="1704153600000" data-listing-file-modified-sort="1721092224357" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="426">
 <div class="thumbnail">
 <p><a href="./posts/GAN/GAN.html" class="no-external"></a></p><a href="./posts/GAN/GAN.html" class="no-external">
 <p class="card-img-top"><img src="posts/GAN/img/데이터셋.png"  class="thumbnail-image card-img"/></p>
@@ -248,29 +254,41 @@ window.Quarto = {
 </div>
 </div>
 <div class="metadata">
-<p><a href="./posts/GAN/GAN.html" class="no-external"></a></p><a href="./posts/GAN/GAN.html" class="no-external">
+<a href="./posts/GAN/GAN.html" class="no-external">
+<div class="listing-date">
+Jan 2, 2024
+</div>
+<div class="listing-author">
+김수환
+</div>
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="2" data-listing-file-modified-sort="1720416985131" data-listing-reading-time-sort="1" data-listing-word-count-sort="142">
+<div class="quarto-post image-right" data-index="2" data-listing-date-sort="1704153600000" data-listing-file-modified-sort="1721092225545" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="163">
 <div class="thumbnail">
 <p><a href="./posts/GAN/전이학습.html" class="no-external"></a></p><a href="./posts/GAN/전이학습.html" class="no-external">
-<p class="card-img-top"><img src="posts/GAN/전이학습_files/figure-html/cell-5-1-image.png"  class="thumbnail-image card-img"/></p>
+<p class="card-img-top"><img src="posts/GAN/전이학습_files/figure-html/cell-6-1-image.png"  class="thumbnail-image card-img"/></p>
 </a><p><a href="./posts/GAN/전이학습.html" class="no-external"></a></p>
 </div>
 <div class="body">
 <h3 class="no-anchor listing-title">
-<a href="./posts/GAN/전이학습.html" class="no-external">배치정규화</a>
+<a href="./posts/GAN/전이학습.html" class="no-external">전이학습</a>
 </h3>
 <div class="listing-subtitle">
 <a href="./posts/GAN/전이학습.html" class="no-external"></a>
 </div>
 <div class="listing-description">
-<a href="./posts/GAN/전이학습.html" class="no-external">크기가 큰 데이터 Da데이터를 학습시키면 feature extraction(특징추출)의 가중치 A<code>를 얻을 수 있다. 우리가 실험하려는 데이터 Db를 학습시킬때 기존 학습된 A</code>에 파인튜닝하면 좋은 결과를 얻을 수 있다. 이때. 데이터의 출력물에 맞게 마지막 부분의 fc레이어를 수정해야한다.</a>
+<a href="./posts/GAN/전이학습.html" class="no-external">내용요약</a>
 </div>
 </div>
 <div class="metadata">
-<p><a href="./posts/GAN/전이학습.html" class="no-external"></a></p><a href="./posts/GAN/전이학습.html" class="no-external">
+<a href="./posts/GAN/전이학습.html" class="no-external">
+<div class="listing-date">
+Jan 2, 2024
+</div>
+<div class="listing-author">
+김수환
+</div>
 </a>
 </div>
 </div>
