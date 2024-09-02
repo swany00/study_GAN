@@ -185,123 +185,148 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 
-<div id="cell-1" class="cell" data-execution_count="1">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> torch</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> torch.nn.functional <span class="im">as</span> F</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pathlib <span class="im">import</span> Path</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> cv2</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> rasterio</span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> glob</span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> affine <span class="im">import</span> Affine</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># planet 위성 영상을 자르는 코드</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>이 코드는 planet 위성 영상을 자르는 작업을 수행합니다. </span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>주어진 이미지 파일을 불러와서 지정된 크기의 패치로 자르고, 자른 패치를 geotiff와 png 형식으로 저장합니다.</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>함수 create_img_label_patches(img_file, patch_size, patch_stride, num_patches, out_dir)는 다음과 같은 매개변수를 받습니다:</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="op">-</span> img_file: 자를 이미지 파일의 경로</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="op">-</span> patch_size: 패치의 크기 (기본값: <span class="dv">512</span>)</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="op">-</span> patch_stride: 패치의 이동 거리 (기본값: <span class="dv">512</span>)</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="op">-</span> num_patches: 생성할 패치의 개수 (기본값: <span class="dv">100</span>)</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="op">-</span> out_dir: 저장할 패치의 경로 (기본값: <span class="st">'./data/patches'</span>)</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>이 함수는 다음과 같은 작업을 수행합니다:</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="fl">1.</span> 이미지 파일을 geotiff 형식으로 열어서 RGB<span class="op">+</span>NIR (<span class="dv">4</span><span class="er">개의</span> 밴드) 형식으로 변환합니다.</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="fl">2.</span> 패치의 크기와 이동 거리를 기반으로 이미지를 패치로 자릅니다.</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="fl">3.</span> 이미지 중앙에서부터 지정된 개수의 패치를 선택합니다.</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="fl">4.</span> 선택된 패치를 geotiff와 png 형식으로 저장합니다.</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>이 코드를 실행하면 planet 위성 영상을 자르는 작업을 수행할 수 있습니다.</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="image.png" class="img-fluid figure-img"></p>
+<figcaption>alt text</figcaption>
+</figure>
 </div>
-<div id="cell-2" class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>data_dict <span class="op">=</span> {<span class="st">'planet'</span>: {<span class="st">'dir'</span>: <span class="st">'full_size_planet_tif'</span>, <span class="st">'image_bits'</span>: <span class="dv">12</span>, <span class="st">'bands'</span>: <span class="st">'BGRN'</span>},</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>             <span class="st">'kompsat'</span>: {<span class="st">'dir'</span>: <span class="st">'full_size_kompsat_tif'</span>, <span class="st">'image_bits'</span>: <span class="dv">14</span>, <span class="st">'bands'</span>: <span class="st">'RGBN'</span>}}</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div id="cell-3" class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> open_geotiff(img_file, bands<span class="op">=</span><span class="st">'RGBN'</span>):</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">with</span> rasterio.<span class="bu">open</span>(img_file) <span class="im">as</span> f:</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>        img <span class="op">=</span> f.read()  <span class="co"># (C, H, W)</span></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>        img <span class="op">=</span> img.transpose(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">0</span>).astype(np.float32)  <span class="co"># (H, W, C), RGB+NIR (4 bands)</span></span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> bands <span class="op">==</span> <span class="st">'BGRN'</span>:</span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>        img <span class="op">=</span> img[:, :, [<span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">3</span>]]</span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">elif</span> bands <span class="op">==</span> <span class="st">'BGR'</span>:</span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>        img <span class="op">=</span> img[:, :, [<span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">0</span>]]</span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> img  </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="cell-3" class="cell" data-execution_count="1">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> torch</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> torch.nn.functional <span class="im">as</span> F</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pathlib <span class="im">import</span> Path</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> cv2</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> rasterio</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> glob</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> affine <span class="im">import</span> Affine</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div id="cell-4" class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> create_img_label_patches(img_file, patch_size<span class="op">=</span><span class="dv">512</span>, patch_stride<span class="op">=</span><span class="dv">512</span>, num_patches<span class="op">=</span><span class="dv">100</span>, out_dir<span class="op">=</span><span class="st">'./data/patches'</span>):   </span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>        img_patch_files <span class="op">=</span> []</span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="st">'creating patches for </span><span class="sc">%s</span><span class="st">...'</span> <span class="op">%</span> img_file, end<span class="op">=</span><span class="st">' '</span>)</span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>        <span class="co"># image patches</span></span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>        img_file <span class="op">=</span> <span class="bu">str</span>(img_file)</span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="kw">not</span> os.path.exists(img_file):</span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>                <span class="cf">raise</span> <span class="pp">Exception</span>(<span class="st">'</span><span class="sc">%s</span><span class="st"> not found'</span> <span class="op">%</span> img_file)</span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>        img <span class="op">=</span> open_geotiff(img_file, bands<span class="op">=</span><span class="st">"BGRN"</span>)  <span class="co"># (H, W, C), RGB+NIR (4 bands), 14-bit image</span></span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>        h, w <span class="op">=</span> img.shape[:<span class="dv">2</span>]  </span>
-<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>        <span class="co"># numpy arrays to tensors</span></span>
-<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>        img <span class="op">=</span> torch.from_numpy(img.transpose(<span class="dv">2</span>, <span class="dv">0</span>, <span class="dv">1</span>)).to(dtype<span class="op">=</span>torch.int16)  <span class="co"># (H, W, C) to (C, H, W)</span></span>
-<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>        pad_h <span class="op">=</span> <span class="bu">int</span>((np.ceil(h <span class="op">/</span> patch_stride) <span class="op">-</span> <span class="dv">1</span>) <span class="op">*</span> patch_stride <span class="op">+</span> patch_size <span class="op">-</span> h)</span>
-<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>        pad_w <span class="op">=</span> <span class="bu">int</span>((np.ceil(w <span class="op">/</span> patch_stride) <span class="op">-</span> <span class="dv">1</span>) <span class="op">*</span> patch_stride <span class="op">+</span> patch_size <span class="op">-</span> w)</span>
-<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>        padded_img <span class="op">=</span> F.pad(img, pad<span class="op">=</span>[<span class="dv">0</span>, pad_w, <span class="dv">0</span>, pad_h])</span>
-<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>        patches <span class="op">=</span> padded_img.unfold(<span class="dv">1</span>, patch_size, patch_stride).unfold(<span class="dv">2</span>, patch_size, patch_stride) <span class="co"># [C, NH, NW, patch_size, patch_size]</span></span>
-<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>        </span>
-<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>        <span class="co"># select patches from the center of the image</span></span>
-<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>        [C, NH, NW, patch_size, patch_size] <span class="op">=</span> patches.shape</span>
-<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a>        patches_per_side <span class="op">=</span> <span class="bu">int</span>(num_patches<span class="op">**</span><span class="fl">0.5</span>)</span>
-<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a>        </span>
-<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> num_patches <span class="op">&gt;</span> NH <span class="op">*</span> NW:</span>
-<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a>            <span class="cf">raise</span> <span class="pp">Exception</span>(<span class="st">'num_patches should be less than or equal to </span><span class="sc">%d</span><span class="st">'</span> <span class="op">%</span> (NH <span class="op">*</span> NW))</span>
-<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a>        </span>
-<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a>        center_row <span class="op">=</span> NH <span class="op">//</span> <span class="dv">2</span></span>
-<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a>        center_col <span class="op">=</span> NW <span class="op">//</span> <span class="dv">2</span></span>
-<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a>        half_patches <span class="op">=</span> patches_per_side <span class="op">//</span> <span class="dv">2</span></span>
-<span id="cb4-31"><a href="#cb4-31" aria-hidden="true" tabindex="-1"></a>        start_row <span class="op">=</span> <span class="bu">max</span>(center_row <span class="op">-</span> half_patches, <span class="dv">0</span>)</span>
-<span id="cb4-32"><a href="#cb4-32" aria-hidden="true" tabindex="-1"></a>        end_row <span class="op">=</span> <span class="bu">min</span>(center_row <span class="op">+</span> half_patches <span class="op">+</span> (patches_per_side <span class="op">%</span> <span class="dv">2</span>), NH)</span>
-<span id="cb4-33"><a href="#cb4-33" aria-hidden="true" tabindex="-1"></a>        </span>
-<span id="cb4-34"><a href="#cb4-34" aria-hidden="true" tabindex="-1"></a>        start_col <span class="op">=</span> <span class="bu">max</span>(center_col <span class="op">-</span> half_patches, <span class="dv">0</span>)</span>
-<span id="cb4-35"><a href="#cb4-35" aria-hidden="true" tabindex="-1"></a>        end_col <span class="op">=</span> <span class="bu">min</span>(center_col <span class="op">+</span> half_patches <span class="op">+</span> (patches_per_side <span class="op">%</span> <span class="dv">2</span>), NW)</span>
-<span id="cb4-36"><a href="#cb4-36" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-37"><a href="#cb4-37" aria-hidden="true" tabindex="-1"></a>        center_patches <span class="op">=</span> patches[:, start_row:end_row, start_col:end_col, :, :] </span>
-<span id="cb4-38"><a href="#cb4-38" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-39"><a href="#cb4-39" aria-hidden="true" tabindex="-1"></a>        tif_dir <span class="op">=</span> Path(out_dir)<span class="op">/</span><span class="st">'tif'</span></span>
-<span id="cb4-40"><a href="#cb4-40" aria-hidden="true" tabindex="-1"></a>        png_dir <span class="op">=</span> Path(out_dir)<span class="op">/</span><span class="st">'png'</span></span>
-<span id="cb4-41"><a href="#cb4-41" aria-hidden="true" tabindex="-1"></a>        os.makedirs(tif_dir, exist_ok<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb4-42"><a href="#cb4-42" aria-hidden="true" tabindex="-1"></a>        os.makedirs(png_dir, exist_ok<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb4-43"><a href="#cb4-43" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-44"><a href="#cb4-44" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-45"><a href="#cb4-45" aria-hidden="true" tabindex="-1"></a>        transform <span class="op">=</span> Affine.translation(<span class="dv">0</span>, <span class="dv">0</span>) <span class="op">*</span> Affine.scale(<span class="dv">1</span>, <span class="op">-</span><span class="dv">1</span>)</span>
-<span id="cb4-46"><a href="#cb4-46" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> y <span class="kw">in</span> <span class="bu">range</span>(center_patches.shape[<span class="dv">1</span>]):</span>
-<span id="cb4-47"><a href="#cb4-47" aria-hidden="true" tabindex="-1"></a>            <span class="cf">for</span> x <span class="kw">in</span> <span class="bu">range</span>(center_patches.shape[<span class="dv">2</span>]):</span>
-<span id="cb4-48"><a href="#cb4-48" aria-hidden="true" tabindex="-1"></a>                <span class="co"># save image patches into geotiff format</span></span>
-<span id="cb4-49"><a href="#cb4-49" aria-hidden="true" tabindex="-1"></a>                patch_img <span class="op">=</span> patches[:, y, x, :, :].contiguous().permute(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">0</span>).numpy().astype(np.uint16)</span>
-<span id="cb4-50"><a href="#cb4-50" aria-hidden="true" tabindex="-1"></a>                <span class="co"># filters patch_img that contains certain percentage of zero values</span></span>
-<span id="cb4-51"><a href="#cb4-51" aria-hidden="true" tabindex="-1"></a>                <span class="cf">if</span> np.count_nonzero(patch_img) <span class="op">&lt;</span> <span class="fl">0.999</span> <span class="op">*</span> patch_img.size:</span>
-<span id="cb4-52"><a href="#cb4-52" aria-hidden="true" tabindex="-1"></a>                    <span class="cf">continue</span></span>
-<span id="cb4-53"><a href="#cb4-53" aria-hidden="true" tabindex="-1"></a>                <span class="cf">with</span> rasterio.<span class="bu">open</span>(</span>
-<span id="cb4-54"><a href="#cb4-54" aria-hidden="true" tabindex="-1"></a>                    os.path.join(tif_dir, os.path.basename(img_file).rsplit(<span class="st">'.tif'</span>)[<span class="dv">0</span>] <span class="op">+</span> <span class="st">'_</span><span class="sc">%d</span><span class="st">_</span><span class="sc">%d</span><span class="st">.tif'</span> <span class="op">%</span> (y, x)),</span>
-<span id="cb4-55"><a href="#cb4-55" aria-hidden="true" tabindex="-1"></a>                    <span class="st">'w'</span>,</span>
-<span id="cb4-56"><a href="#cb4-56" aria-hidden="true" tabindex="-1"></a>                    driver<span class="op">=</span><span class="st">'GTiff'</span>,</span>
-<span id="cb4-57"><a href="#cb4-57" aria-hidden="true" tabindex="-1"></a>                    height<span class="op">=</span>patch_img.shape[<span class="dv">0</span>],</span>
-<span id="cb4-58"><a href="#cb4-58" aria-hidden="true" tabindex="-1"></a>                    width<span class="op">=</span>patch_img.shape[<span class="dv">1</span>],</span>
-<span id="cb4-59"><a href="#cb4-59" aria-hidden="true" tabindex="-1"></a>                    count<span class="op">=</span>patch_img.shape[<span class="dv">2</span>],</span>
-<span id="cb4-60"><a href="#cb4-60" aria-hidden="true" tabindex="-1"></a>                    dtype<span class="op">=</span>rasterio.uint16,</span>
-<span id="cb4-61"><a href="#cb4-61" aria-hidden="true" tabindex="-1"></a>                    crs<span class="op">=</span><span class="st">'+proj=latlong'</span>,</span>
-<span id="cb4-62"><a href="#cb4-62" aria-hidden="true" tabindex="-1"></a>                    transform<span class="op">=</span>transform,</span>
-<span id="cb4-63"><a href="#cb4-63" aria-hidden="true" tabindex="-1"></a>                ) <span class="im">as</span> dst:</span>
-<span id="cb4-64"><a href="#cb4-64" aria-hidden="true" tabindex="-1"></a>                    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(patch_img.shape[<span class="dv">2</span>]):</span>
-<span id="cb4-65"><a href="#cb4-65" aria-hidden="true" tabindex="-1"></a>                        dst.write(patch_img[:, :, i], i <span class="op">+</span> <span class="dv">1</span>)</span>
-<span id="cb4-66"><a href="#cb4-66" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-67"><a href="#cb4-67" aria-hidden="true" tabindex="-1"></a>                <span class="co"># save image patches into png format</span></span>
-<span id="cb4-68"><a href="#cb4-68" aria-hidden="true" tabindex="-1"></a>                patch_img <span class="op">=</span> (patch_img[...,:<span class="dv">3</span>] <span class="op">/</span> (<span class="dv">2</span><span class="op">**</span><span class="dv">12</span> <span class="op">-</span> <span class="dv">1</span>) <span class="op">*</span> <span class="fl">255.0</span>).clip(<span class="fl">0.0</span>, <span class="fl">255.0</span>).astype(np.uint8)</span>
-<span id="cb4-69"><a href="#cb4-69" aria-hidden="true" tabindex="-1"></a>                patch_img <span class="op">=</span> cv2.cvtColor(patch_img, cv2.COLOR_RGB2BGR)</span>
-<span id="cb4-70"><a href="#cb4-70" aria-hidden="true" tabindex="-1"></a>                </span>
-<span id="cb4-71"><a href="#cb4-71" aria-hidden="true" tabindex="-1"></a>                cv2.imwrite(os.path.join(png_dir, os.path.basename(img_file).rsplit(<span class="st">'.tif'</span>)[<span class="dv">0</span>] <span class="op">+</span> <span class="st">'_</span><span class="sc">%d</span><span class="st">_</span><span class="sc">%d</span><span class="st">.png'</span> <span class="op">%</span> (y, x)), patch_img)</span>
-<span id="cb4-72"><a href="#cb4-72" aria-hidden="true" tabindex="-1"></a>                </span>
-<span id="cb4-73"><a href="#cb4-73" aria-hidden="true" tabindex="-1"></a>        </span>
-<span id="cb4-74"><a href="#cb4-74" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="st">'success'</span>)</span>
-<span id="cb4-75"><a href="#cb4-75" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-76"><a href="#cb4-76" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> img_patch_files</span>
-<span id="cb4-77"><a href="#cb4-77" aria-hidden="true" tabindex="-1"></a></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>data_dict <span class="op">=</span> {<span class="st">'planet'</span>: {<span class="st">'dir'</span>: <span class="st">'full_size_planet_tif'</span>, <span class="st">'image_bits'</span>: <span class="dv">12</span>, <span class="st">'bands'</span>: <span class="st">'BGRN'</span>},</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>             <span class="st">'kompsat'</span>: {<span class="st">'dir'</span>: <span class="st">'full_size_kompsat_tif'</span>, <span class="st">'image_bits'</span>: <span class="dv">14</span>, <span class="st">'bands'</span>: <span class="st">'RGBN'</span>}}</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div id="cell-5" class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> open_geotiff(img_file, bands<span class="op">=</span><span class="st">'RGBN'</span>):</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">with</span> rasterio.<span class="bu">open</span>(img_file) <span class="im">as</span> f:</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>        img <span class="op">=</span> f.read()  <span class="co"># (C, H, W)</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>        img <span class="op">=</span> img.transpose(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">0</span>).astype(np.float32)  <span class="co"># (H, W, C), RGB+NIR (4 bands)</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> bands <span class="op">==</span> <span class="st">'BGRN'</span>:</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>        img <span class="op">=</span> img[:, :, [<span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">3</span>]]</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">elif</span> bands <span class="op">==</span> <span class="st">'BGR'</span>:</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>        img <span class="op">=</span> img[:, :, [<span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">0</span>]]</span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> img  </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="cell-6" class="cell">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="va">__name__</span> <span class="op">==</span> <span class="st">'__main__'</span>:</span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    root <span class="op">=</span> Path(<span class="st">'data/jbnu_cloud'</span>)</span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    img_files <span class="op">=</span> (root<span class="op">/</span><span class="st">'full_size_planet_tif'</span>).glob(<span class="st">'*.tif'</span>)</span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> img_file <span class="kw">in</span> img_files:</span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>        create_img_label_patches(img_file, patch_size<span class="op">=</span><span class="dv">512</span>, patch_stride<span class="op">=</span><span class="dv">512</span>, num_patches<span class="op">=</span><span class="dv">150</span>, out_dir<span class="op">=</span><span class="st">'./data/patches/planet'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> create_img_label_patches(img_file, patch_size<span class="op">=</span><span class="dv">512</span>, patch_stride<span class="op">=</span><span class="dv">512</span>, num_patches<span class="op">=</span><span class="dv">100</span>, out_dir<span class="op">=</span><span class="st">'./data/patches'</span>):   </span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>        img_patch_files <span class="op">=</span> []</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="st">'creating patches for </span><span class="sc">%s</span><span class="st">...'</span> <span class="op">%</span> img_file, end<span class="op">=</span><span class="st">' '</span>)</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>        <span class="co"># image patches</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>        img_file <span class="op">=</span> <span class="bu">str</span>(img_file)</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="kw">not</span> os.path.exists(img_file):</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>                <span class="cf">raise</span> <span class="pp">Exception</span>(<span class="st">'</span><span class="sc">%s</span><span class="st"> not found'</span> <span class="op">%</span> img_file)</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>        img <span class="op">=</span> open_geotiff(img_file, bands<span class="op">=</span><span class="st">"BGRN"</span>)  <span class="co"># (H, W, C), RGB+NIR (4 bands), 14-bit image</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>        h, w <span class="op">=</span> img.shape[:<span class="dv">2</span>]  </span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>        <span class="co"># numpy arrays to tensors</span></span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>        img <span class="op">=</span> torch.from_numpy(img.transpose(<span class="dv">2</span>, <span class="dv">0</span>, <span class="dv">1</span>)).to(dtype<span class="op">=</span>torch.int16)  <span class="co"># (H, W, C) to (C, H, W)</span></span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>        pad_h <span class="op">=</span> <span class="bu">int</span>((np.ceil(h <span class="op">/</span> patch_stride) <span class="op">-</span> <span class="dv">1</span>) <span class="op">*</span> patch_stride <span class="op">+</span> patch_size <span class="op">-</span> h)</span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>        pad_w <span class="op">=</span> <span class="bu">int</span>((np.ceil(w <span class="op">/</span> patch_stride) <span class="op">-</span> <span class="dv">1</span>) <span class="op">*</span> patch_stride <span class="op">+</span> patch_size <span class="op">-</span> w)</span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>        padded_img <span class="op">=</span> F.pad(img, pad<span class="op">=</span>[<span class="dv">0</span>, pad_w, <span class="dv">0</span>, pad_h])</span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>        patches <span class="op">=</span> padded_img.unfold(<span class="dv">1</span>, patch_size, patch_stride).unfold(<span class="dv">2</span>, patch_size, patch_stride) <span class="co"># [C, NH, NW, patch_size, patch_size]</span></span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a>        <span class="co"># select patches from the center of the image</span></span>
+<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a>        [C, NH, NW, patch_size, patch_size] <span class="op">=</span> patches.shape</span>
+<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a>        patches_per_side <span class="op">=</span> <span class="bu">int</span>(num_patches<span class="op">**</span><span class="fl">0.5</span>)</span>
+<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> num_patches <span class="op">&gt;</span> NH <span class="op">*</span> NW:</span>
+<span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a>            <span class="cf">raise</span> <span class="pp">Exception</span>(<span class="st">'num_patches should be less than or equal to </span><span class="sc">%d</span><span class="st">'</span> <span class="op">%</span> (NH <span class="op">*</span> NW))</span>
+<span id="cb5-26"><a href="#cb5-26" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb5-27"><a href="#cb5-27" aria-hidden="true" tabindex="-1"></a>        center_row <span class="op">=</span> NH <span class="op">//</span> <span class="dv">2</span></span>
+<span id="cb5-28"><a href="#cb5-28" aria-hidden="true" tabindex="-1"></a>        center_col <span class="op">=</span> NW <span class="op">//</span> <span class="dv">2</span></span>
+<span id="cb5-29"><a href="#cb5-29" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb5-30"><a href="#cb5-30" aria-hidden="true" tabindex="-1"></a>        half_patches <span class="op">=</span> patches_per_side <span class="op">//</span> <span class="dv">2</span></span>
+<span id="cb5-31"><a href="#cb5-31" aria-hidden="true" tabindex="-1"></a>        start_row <span class="op">=</span> <span class="bu">max</span>(center_row <span class="op">-</span> half_patches, <span class="dv">0</span>)</span>
+<span id="cb5-32"><a href="#cb5-32" aria-hidden="true" tabindex="-1"></a>        end_row <span class="op">=</span> <span class="bu">min</span>(center_row <span class="op">+</span> half_patches <span class="op">+</span> (patches_per_side <span class="op">%</span> <span class="dv">2</span>), NH)</span>
+<span id="cb5-33"><a href="#cb5-33" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb5-34"><a href="#cb5-34" aria-hidden="true" tabindex="-1"></a>        start_col <span class="op">=</span> <span class="bu">max</span>(center_col <span class="op">-</span> half_patches, <span class="dv">0</span>)</span>
+<span id="cb5-35"><a href="#cb5-35" aria-hidden="true" tabindex="-1"></a>        end_col <span class="op">=</span> <span class="bu">min</span>(center_col <span class="op">+</span> half_patches <span class="op">+</span> (patches_per_side <span class="op">%</span> <span class="dv">2</span>), NW)</span>
+<span id="cb5-36"><a href="#cb5-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-37"><a href="#cb5-37" aria-hidden="true" tabindex="-1"></a>        center_patches <span class="op">=</span> patches[:, start_row:end_row, start_col:end_col, :, :] </span>
+<span id="cb5-38"><a href="#cb5-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-39"><a href="#cb5-39" aria-hidden="true" tabindex="-1"></a>        tif_dir <span class="op">=</span> Path(out_dir)<span class="op">/</span><span class="st">'tif'</span></span>
+<span id="cb5-40"><a href="#cb5-40" aria-hidden="true" tabindex="-1"></a>        png_dir <span class="op">=</span> Path(out_dir)<span class="op">/</span><span class="st">'png'</span></span>
+<span id="cb5-41"><a href="#cb5-41" aria-hidden="true" tabindex="-1"></a>        os.makedirs(tif_dir, exist_ok<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb5-42"><a href="#cb5-42" aria-hidden="true" tabindex="-1"></a>        os.makedirs(png_dir, exist_ok<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb5-43"><a href="#cb5-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-44"><a href="#cb5-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-45"><a href="#cb5-45" aria-hidden="true" tabindex="-1"></a>        transform <span class="op">=</span> Affine.translation(<span class="dv">0</span>, <span class="dv">0</span>) <span class="op">*</span> Affine.scale(<span class="dv">1</span>, <span class="op">-</span><span class="dv">1</span>)</span>
+<span id="cb5-46"><a href="#cb5-46" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> y <span class="kw">in</span> <span class="bu">range</span>(center_patches.shape[<span class="dv">1</span>]):</span>
+<span id="cb5-47"><a href="#cb5-47" aria-hidden="true" tabindex="-1"></a>            <span class="cf">for</span> x <span class="kw">in</span> <span class="bu">range</span>(center_patches.shape[<span class="dv">2</span>]):</span>
+<span id="cb5-48"><a href="#cb5-48" aria-hidden="true" tabindex="-1"></a>                <span class="co"># save image patches into geotiff format</span></span>
+<span id="cb5-49"><a href="#cb5-49" aria-hidden="true" tabindex="-1"></a>                patch_img <span class="op">=</span> patches[:, y, x, :, :].contiguous().permute(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">0</span>).numpy().astype(np.uint16)</span>
+<span id="cb5-50"><a href="#cb5-50" aria-hidden="true" tabindex="-1"></a>                <span class="co"># filters patch_img that contains certain percentage of zero values</span></span>
+<span id="cb5-51"><a href="#cb5-51" aria-hidden="true" tabindex="-1"></a>                <span class="cf">if</span> np.count_nonzero(patch_img) <span class="op">&lt;</span> <span class="fl">0.999</span> <span class="op">*</span> patch_img.size:</span>
+<span id="cb5-52"><a href="#cb5-52" aria-hidden="true" tabindex="-1"></a>                    <span class="cf">continue</span></span>
+<span id="cb5-53"><a href="#cb5-53" aria-hidden="true" tabindex="-1"></a>                <span class="cf">with</span> rasterio.<span class="bu">open</span>(</span>
+<span id="cb5-54"><a href="#cb5-54" aria-hidden="true" tabindex="-1"></a>                    os.path.join(tif_dir, os.path.basename(img_file).rsplit(<span class="st">'.tif'</span>)[<span class="dv">0</span>] <span class="op">+</span> <span class="st">'_</span><span class="sc">%d</span><span class="st">_</span><span class="sc">%d</span><span class="st">.tif'</span> <span class="op">%</span> (y, x)),</span>
+<span id="cb5-55"><a href="#cb5-55" aria-hidden="true" tabindex="-1"></a>                    <span class="st">'w'</span>,</span>
+<span id="cb5-56"><a href="#cb5-56" aria-hidden="true" tabindex="-1"></a>                    driver<span class="op">=</span><span class="st">'GTiff'</span>,</span>
+<span id="cb5-57"><a href="#cb5-57" aria-hidden="true" tabindex="-1"></a>                    height<span class="op">=</span>patch_img.shape[<span class="dv">0</span>],</span>
+<span id="cb5-58"><a href="#cb5-58" aria-hidden="true" tabindex="-1"></a>                    width<span class="op">=</span>patch_img.shape[<span class="dv">1</span>],</span>
+<span id="cb5-59"><a href="#cb5-59" aria-hidden="true" tabindex="-1"></a>                    count<span class="op">=</span>patch_img.shape[<span class="dv">2</span>],</span>
+<span id="cb5-60"><a href="#cb5-60" aria-hidden="true" tabindex="-1"></a>                    dtype<span class="op">=</span>rasterio.uint16,</span>
+<span id="cb5-61"><a href="#cb5-61" aria-hidden="true" tabindex="-1"></a>                    crs<span class="op">=</span><span class="st">'+proj=latlong'</span>,</span>
+<span id="cb5-62"><a href="#cb5-62" aria-hidden="true" tabindex="-1"></a>                    transform<span class="op">=</span>transform,</span>
+<span id="cb5-63"><a href="#cb5-63" aria-hidden="true" tabindex="-1"></a>                ) <span class="im">as</span> dst:</span>
+<span id="cb5-64"><a href="#cb5-64" aria-hidden="true" tabindex="-1"></a>                    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(patch_img.shape[<span class="dv">2</span>]):</span>
+<span id="cb5-65"><a href="#cb5-65" aria-hidden="true" tabindex="-1"></a>                        dst.write(patch_img[:, :, i], i <span class="op">+</span> <span class="dv">1</span>)</span>
+<span id="cb5-66"><a href="#cb5-66" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-67"><a href="#cb5-67" aria-hidden="true" tabindex="-1"></a>                <span class="co"># save image patches into png format</span></span>
+<span id="cb5-68"><a href="#cb5-68" aria-hidden="true" tabindex="-1"></a>                patch_img <span class="op">=</span> (patch_img[...,:<span class="dv">3</span>] <span class="op">/</span> (<span class="dv">2</span><span class="op">**</span><span class="dv">12</span> <span class="op">-</span> <span class="dv">1</span>) <span class="op">*</span> <span class="fl">255.0</span>).clip(<span class="fl">0.0</span>, <span class="fl">255.0</span>).astype(np.uint8)</span>
+<span id="cb5-69"><a href="#cb5-69" aria-hidden="true" tabindex="-1"></a>                patch_img <span class="op">=</span> cv2.cvtColor(patch_img, cv2.COLOR_RGB2BGR)</span>
+<span id="cb5-70"><a href="#cb5-70" aria-hidden="true" tabindex="-1"></a>                </span>
+<span id="cb5-71"><a href="#cb5-71" aria-hidden="true" tabindex="-1"></a>                cv2.imwrite(os.path.join(png_dir, os.path.basename(img_file).rsplit(<span class="st">'.tif'</span>)[<span class="dv">0</span>] <span class="op">+</span> <span class="st">'_</span><span class="sc">%d</span><span class="st">_</span><span class="sc">%d</span><span class="st">.png'</span> <span class="op">%</span> (y, x)), patch_img)</span>
+<span id="cb5-72"><a href="#cb5-72" aria-hidden="true" tabindex="-1"></a>                </span>
+<span id="cb5-73"><a href="#cb5-73" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb5-74"><a href="#cb5-74" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="st">'success'</span>)</span>
+<span id="cb5-75"><a href="#cb5-75" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-76"><a href="#cb5-76" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> img_patch_files</span>
+<span id="cb5-77"><a href="#cb5-77" aria-hidden="true" tabindex="-1"></a></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="cell-7" class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="va">__name__</span> <span class="op">==</span> <span class="st">'__main__'</span>:</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    root <span class="op">=</span> Path(<span class="st">'data/jbnu_cloud'</span>)</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>    img_files <span class="op">=</span> (root<span class="op">/</span><span class="st">'full_size_planet_tif'</span>).glob(<span class="st">'*.tif'</span>)</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> img_file <span class="kw">in</span> img_files:</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>        create_img_label_patches(img_file, patch_size<span class="op">=</span><span class="dv">512</span>, patch_stride<span class="op">=</span><span class="dv">512</span>, num_patches<span class="op">=</span><span class="dv">150</span>, out_dir<span class="op">=</span><span class="st">'./data/patches/planet'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 
 

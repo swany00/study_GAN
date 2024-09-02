@@ -191,7 +191,7 @@ window.Quarto = {
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         
-    <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">All <span class="quarto-category-count">(2)</span></div></div></div>
+    <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">All <span class="quarto-category-count">(3)</span></div></div></div>
 <!-- main -->
 <main class="content quarto-banner-title-block column-page-left" id="quarto-document-content">
 
@@ -237,10 +237,10 @@ window.Quarto = {
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="1" data-listing-date-sort="1725235200000" data-listing-file-modified-sort="1725247007416" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="1">
+<div class="quarto-post image-right" data-index="1" data-listing-date-sort="1725235200000" data-listing-file-modified-sort="1725247552361" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="105">
 <div class="thumbnail">
 <p><a href="./posts/data_prep/Planet.html" class="no-external"></a></p><a href="./posts/data_prep/Planet.html" class="no-external">
-<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
+<p class="card-img-top"><img src="posts/data_prep/image.png"  class="thumbnail-image card-img"/></p>
 </a><p><a href="./posts/data_prep/Planet.html" class="no-external"></a></p>
 </div>
 <div class="body">
@@ -251,21 +251,44 @@ window.Quarto = {
 <a href="./posts/data_prep/Planet.html" class="no-external"></a>
 </div>
 <div class="listing-description">
-<a href="./posts/data_prep/Planet.html" class="no-external">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="im">import</span> os</span>
-<span id="cb1-2"><span class="im">import</span> torch</span>
-<span id="cb1-3"><span class="im">import</span> torch.nn.functional <span class="im">as</span> F</span>
-<span id="cb1-4"><span class="im">from</span> pathlib <span class="im">import</span> Path</span>
-<span id="cb1-5"><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb1-6"><span class="im">import</span> cv2</span>
-<span id="cb1-7"><span class="im">import</span> rasterio</span>
-<span id="cb1-8"><span class="im">import</span> glob</span>
-<span id="cb1-9"><span class="im">from</span> affine <span class="im">import</span> Affine</span></code></pre></div>
-</a>
+<a href="./posts/data_prep/Planet.html" class="no-external"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="co"># planet 위성 영상을 자르는 코드</span></span>
+<span id="cb1-2"></span>
+<span id="cb1-3">이 코드는 planet 위성 영상을 자르는 작업을 수행합니다. </span>
+<span id="cb1-4">주어진 이미지 파일을 불러와서 지정된 크기의 패치로 자르고, 자른 패치를 geotiff와 png 형식으로 저장합니다.</span>
+<span id="cb1-5"></span>
+<span id="cb1-6">함수 create_img_label_patches(img_file…</span><span id="cb1-7"><span class="op"></span></span><span id="cb1-8"><span class="op"></span><span class="dv"></span></span><span id="cb1-9"><span class="op"></span><span class="dv"></span></span><span id="cb1-10"><span class="op"></span><span class="dv"></span></span><span id="cb1-11"><span class="op"></span><span class="st"></span></span><span id="cb1-12"></span><span id="cb1-13"></span><span id="cb1-14"><span class="fl"></span><span class="op"></span><span class="dv"></span><span class="er"></span></span><span id="cb1-15"><span class="fl"></span></span><span id="cb1-16"><span class="fl"></span></span><span id="cb1-17"><span class="fl"></span></span><span id="cb1-18"></span><span id="cb1-19"></span></code></pre></a>
 </div>
 </div>
 <div class="metadata">
 <a href="./posts/data_prep/Planet.html" class="no-external">
+<div class="listing-date">
+Sep 2, 2024
+</div>
+<div class="listing-author">
+김수환
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="2" data-listing-date-sort="1725235200000" data-listing-file-modified-sort="1725272714683" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="97">
+<div class="thumbnail">
+<p><a href="./posts/data_prep/open_geotiff.html" class="no-external"></a></p><a href="./posts/data_prep/open_geotiff.html" class="no-external">
+<p class="card-img-top"><img src="posts/data_prep/open_geotiff_files/figure-html/cell-4-output-1.png"  class="thumbnail-image card-img"/></p>
+</a><p><a href="./posts/data_prep/open_geotiff.html" class="no-external"></a></p>
+</div>
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="./posts/data_prep/open_geotiff.html" class="no-external">open_geotiff</a>
+</h3>
+<div class="listing-subtitle">
+<a href="./posts/data_prep/open_geotiff.html" class="no-external"></a>
+</div>
+<div class="listing-description">
+<a href="./posts/data_prep/open_geotiff.html" class="no-external"><span style="color:red"> matplotlib 으로 시각화</span></a>
+</div>
+</div>
+<div class="metadata">
+<a href="./posts/data_prep/open_geotiff.html" class="no-external">
 <div class="listing-date">
 Sep 2, 2024
 </div>
