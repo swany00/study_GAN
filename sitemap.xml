@@ -1,19 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://swany00.github.io/study_GAN/about.html</loc>
-    <lastmod>2024-09-02T02:48:48.751Z</lastmod>
-  </url>
-  <url>
-    <loc>https://swany00.github.io/study_GAN/posts/welcome/index.html</loc>
-    <lastmod>2024-09-02T02:48:48.751Z</lastmod>
-  </url>
-  <url>
-    <loc>https://swany00.github.io/study_GAN/posts/post-with-code/index.html</loc>
-    <lastmod>2024-09-02T02:48:48.751Z</lastmod>
+    <loc>https://swany00.github.io/study_GAN/2022-03-28-(4주차) 3월28일.html</loc>
+    <lastmod>2024-09-02T03:01:49.520Z</lastmod>
   </url>
   <url>
     <loc>https://swany00.github.io/study_GAN/index.html</loc>
+    <lastmod>2024-09-02T02:48:48.751Z</lastmod>
+  </url>
+  <url>
+    <loc>https://swany00.github.io/study_GAN/posts/data_prep/Planet.html</loc>
+    <lastmod>2024-09-02T02:58:24.355Z</lastmod>
+  </url>
+  <url>
+    <loc>https://swany00.github.io/study_GAN/posts/data_prep/Kompsat.html</loc>
+    <lastmod>2024-09-02T02:58:46.335Z</lastmod>
+  </url>
+  <url>
+    <loc>https://swany00.github.io/study_GAN/about.html</loc>
     <lastmod>2024-09-02T02:48:48.751Z</lastmod>
   </url>
 </urlset>
