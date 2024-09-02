@@ -7,59 +7,24 @@
     "text": "About this blog"
   },
   {
-    "objectID": "posts/GAN/전이학습.html",
-    "href": "posts/GAN/전이학습.html",
-    "title": "전이학습",
+    "objectID": "posts/welcome/index.html",
+    "href": "posts/welcome/index.html",
+    "title": "Welcome To My Blog",
     "section": "",
-    "text": "BIG TRANSFER(BiT): 전이학습\n\n#General Visual Representation Learning\n#일반적인 목적으로 쉽게 사용가능한 이미지 분야에서 사용가능한 \n\n\n#학습된 모델을 받아서 파인튜닝 혹은 transfer learning을 이용해 좋은 성능을 얻으 낼 수 있다.\n \n\n내용요약\n전이학습을 이용한 성공적인 수행방법을 소개하고 있다.\n결과를 먼저 봤을때 데이터 세트의 크기가 작을 때에도 매우 높은 정확도를 보인다.\n큰 크기의 data로 사전학습된 cnn을 불러와서\n\n\n\nimage.png\n\n\n크기가 큰 데이터 Da데이터를 학습시키면 feature extraction(특징추출)의 가중치 A를 얻을 수 있다. 우리가 실험하려는 데이터 Db를 학습시킬때 기존 학습된 A에 파인튜닝하면 좋은 결과를 얻을 수 있다. 이때. 데이터의 출력물에 맞게 마지막 부분의 fc레이어를 수정해야한다.\n결과는 괜찮다.\n프리징방식 파인튜닝방식\n\n\n\nimage.png\n\n\n1)프리징방식\n앞부분의 레이어를 얼려서 학습하지 않고, 마지막 레이어만 학습하는 방식으로 우리가 가진 작은 데이터들의 오차까지 학습시키지 않기 때문에 오버피팅으로 부터는 자유롭다.\n2)미세조정 fine tuning\n앞부분의 레이어까지도 학습하는 방식이다. 전이학습에서 보통 미세조정 방식을 많이 쓰기때문에 용어를 혼동해서 쓰기도 한다.\n사전학습된 모델을 이용해 실제로 풀고자 하는 문제를 downstream task라고 한다. downstream은 비교적 비용이 적게 든다.\n\n\n배치정규화\n배치정규화는 레이어의 입력에 대해서 정규화를 진행하며, 잘 알려진 장점은 다음과 같다. 2. input layer를 배치정규화 하는이유는 평균값 0 가중치 1이기때문에 가중치 초기화에 대한 부담감이 적고 좋은 정확도 마찬가지로 피쳐들도 히든레이어에 들어가기 전에 배치정규화를 해준다면 가중치 초기화에 대한 민감도가 감소될 것이다. 3. 전반적으로 수렴속도가 빨라지기 때문에 학습 속도도 빨라진다. 4. 모델의 일반화 효과가 있어 정확도가 향상되는 경향이 있다.\n구현원리는 감마와 베타 이 두개의 파라미터로 구현된다."
+    "text": "This is the first post in a Quarto blog. Welcome!\n\nSince this post doesn’t specify an explicit image, the first image in the post will be used in the listing page of posts."
   },
   {
-    "objectID": "posts/GAN/그림그린도화지.html",
-    "href": "posts/GAN/그림그린도화지.html",
-    "title": "그림 그릴때 참고",
+    "objectID": "posts/post-with-code/index.html",
+    "href": "posts/post-with-code/index.html",
+    "title": "Post With Code",
     "section": "",
-    "text": "import matplotlib.font_manager\nfont_list = matplotlib.font_manager.findSystemFonts(fontpaths=None, fontext='ttf')\n[matplotlib.font_manager.FontProperties(fname=font).get_name() for font in font_list if 'Nanum' in font]\n\\\nimport matplotlib.pyplot as plt\nplt.rc('font', family='NanumGothicCoding')\n\\\nimport matplotlib as mpl\nmpl.rcParams['axes.unicode_minus'] = False\n\n\nimport matplotlib.pyplot as plt\nimport numpy as np\nfrom scipy.signal import find_peaks\n\n# Define the x range\nx = np.linspace(1, 8, 1000)\n\n# Define a function that adds moderate wiggles\ndef complex_function(x):\n    return np.exp(-0.2 * x) * (np.sin(2 * x) + 0.5 * np.sin(5 * x) + np.cos(3 * x))\n\n# Compute y values\ny = complex_function(x)\n\n# Find peaks\npeaks, _ = find_peaks(y)\n\n# Create the plot\nplt.figure(figsize=(10, 5))\nplt.plot(x, y, label='$p_{data}(x)$')\n\n# Plot peaks with labels\nplt.plot(x[peaks], y[peaks], 'ro', markersize=8, label='Peaks')\n\n# Add labels manually\nplt.text(x[peaks[0]], y[peaks[0]], '흑발의 여성', fontsize=12, ha='center', va='bottom')\nplt.text(x[peaks[1]], y[peaks[1]], '안경쓴 남성', fontsize=12, ha='center', va='bottom')\nplt.text(x[peaks[2]], y[peaks[2]], '금발의 여성', fontsize=12, ha='center', va='bottom')\n\n# Remove x and y ticks\nplt.xticks([])\nplt.yticks([])\n\n\n\n# Display the plot\nplt.show()\n\n\n\n\n\n\n\n\n\nimport matplotlib.pyplot as plt\nimport numpy as np\nfrom scipy.signal import find_peaks\n\n# Define the x range\nx = np.linspace(1, 8, 1000)\n\n# Define a function that adds moderate wiggles\ndef complex_function(x):\n    return np.exp(-0.2 * x) * (np.sin(2 * x) + 0.5 * np.sin(5 * x) + np.cos(3 * x))\n\n# Compute y values\ny = complex_function(x)\n\n# Find peaks\npeaks, _ = find_peaks(y)\n\n# Create the plot\nplt.figure(figsize=(10, 5))\n\n# Plot the original function\nplt.plot(x, y, label='$p_{data}(x)$')\n\n# Plot the shifted red graph\nplt.plot(x + 0.5, y, 'r-', alpha=0.5, label='Shifted $p_{data}(x)$')\n\n# Remove red peaks\n#plt.plot(x[peaks], y[peaks], 'ro', markersize=8)  # Don't include label here\n\n# Add labels manually (if needed)\n# plt.text(x[peaks[0]], y[peaks[0]], '흑발의 여성', fontsize=12, ha='center', va='bottom')\n# plt.text(x[peaks[1]], y[peaks[1]], '안경쓴 남성', fontsize=12, ha='center', va='bottom')\n# plt.text(x[peaks[2]], y[peaks[2]], '금발의 여성', fontsize=12, ha='center', va='bottom')\n\n# Remove x and y ticks\nplt.xticks([])\nplt.yticks([])\n\nplt.legend(labels=['정답데이터의 분포', '모델이 생성한 데이터 분포'], loc='upper right', fontsize=12,  shadow=True, frameon=True, framealpha=0.8, facecolor='lightyellow', edgecolor='blue')\n\n\n\n# Add grid for better readability\nplt.grid(True)\n\n# Display the plot\nplt.show()"
-  },
-  {
-    "objectID": "posts/GAN/GAN.html",
-    "href": "posts/GAN/GAN.html",
-    "title": "GAN",
-    "section": "",
-    "text": "generate의 모델이 train데이터의 분포를 학습하는 것이 목표이다.\n\n\n확률변수 : 확률 변수란 특정한 값을 가진 확률을 나타내는 함수를 의미한다. ex)주사위의 확률 변수 1/6\n\n이산확률분포 : 확률변수 x의 개수를 정확히 셀 수 있을때의 분포 ex)주사위는 1/6\n연속확률분포 : 각각의 사건들의 값이 연속적이라고 하면 정규분포처럼 모델링 가능하다. ex)달리기 기록, IQ 값\n\n\n\n\n이미지 같은 경우에는 많은 픽셀로 구성되어있고 채널도 3개씩있다. 고차원이라고 해도 통계적인 평균치가 존재할 수 있고 모델은 이를 수치적을 표현할 수 있게된다.\n\n\n\nalt text\n\n\n다음과 같이 64643 shape의 서양인 얼굴 데이터 셋이 있다고 하자\n\n\n\nalt text\n\n\n실제 이미지의 확률밀도함수가 있을때 이러한 1차원의 그래프의 형태를 띈다고 가정을 하겠다.(실제로는 굉장한 고차원의 벡터이다.)\n서양 사람 얼굴데이터세트에서 금발의 여성데이터셋이 가장 많다고 했을때 금발의 여성에 해당하는 벡터의 확률밀도 값이 가장크고 그다음 흑발의 여성이 큰 것을 알 수 있다. 반면 안경을 낀 남자의 데이터가 작다고 했을때 해당하는 벡터의 확률 밀도값은 상대적으로 작게 나타난다.\n만약 사람의 이미지가 아니거나 깨진이미지 같은 경우는 안경쓴 남성보다 작은 값의 확률 밀도를 갖게 될 것이다.\n\n\n\nalt text\n\n\n파란색은 원래의 64*64*3의 픽셀의 데이터의 분포이고\n빨간색은 모델이 생성한 64*64*3의 픽셀의 데이터의 분포이다.\n즉. Generative Adversarial모델의 목표는 두게의 격차를 좁히는 것이다."
-  },
-  {
-    "objectID": "posts/GAN/GAN.html#직관적인-해석",
-    "href": "posts/GAN/GAN.html#직관적인-해석",
-    "title": "GAN",
-    "section": "1) 직관적인 해석",
-    "text": "1) 직관적인 해석\n\n\n\nalt text\n\n\n위의 그림은 진짜 이미지를 가지고 학습할 때이고 아래의 그림은 가짜이미지를 가지고 학습할때이다.\nGAN에는 2가지 모델이 존재한다. 1) Discriminator 모델 2) Generator 모델\n최종 목적은 generator를 학습시키는 것이다.\n먼저 Discriminator같은 경우는 진짜이미지를 진짜로 구별하도록 가짜를 넣으면 가짜로 구별하도록 학습시키는방법 Discriminator모델의 input은 (64*64*3)의 고정된 벡터 output은 (확률1,확률2)로 진짜인지 가짜인지 classification해주면된다. 보통 sigmoid 함수를 거쳐서 0.5를 기준으로 classification하게 된다.\n다음 Generator같은 경우는 랜덤한 코드를 받아서 이미지를 생성해야 하고 Discriminator모델을 속여서 1이 나오게 해야한다."
-  },
-  {
-    "objectID": "posts/GAN/GAN.html#수식으로-해석",
-    "href": "posts/GAN/GAN.html#수식으로-해석",
-    "title": "GAN",
-    "section": "2)수식으로 해석",
-    "text": "2)수식으로 해석\n\n\n\nalt text\n\n\nD는 Discriminator 모델 G는 Generator 모델\n\nEx-Pdata(x)[log D(x)] = 평균~정답데이터분포(로부터 샘플링)을 했을때 D모델은 1에 가까운 값을 내도록 반응해야한다. 그래서 logD(x(샘플))값이 최대화되도록 하면된다.\nD(x)값의 범위는 0~1사이의 값이다. 즉 logD(x)에 적용되면 D(x)가 1일때 최대값이 되고 0일때는 -무한대 값이 된다.\nEz~p2(z) [log(1 − D(G(z)))] = 랜덤한 벡터를 모델G한테 줬을때 가짜이미지를 생성했고 가짜이미지를 모델D에 넣었을때의 결과는 가짜이미지이기 때문에 0에 가까운 값을 내놔야한다. 이것을 수식적으로 표현할때에는 log(1-x)로 표현을 했다. 그래서 가짜를 성공적으로 판별했을때의 결과가 1에 가깝게 표현되었다.\n두 식다 log()이고 결과가 1에 가까워야 성공적인 학습이 되도록 설계 되어있다."
-  },
-  {
-    "objectID": "posts/GAN/GAN.html#code로-해석",
-    "href": "posts/GAN/GAN.html#code로-해석",
-    "title": "GAN",
-    "section": "3)code로 해석",
-    "text": "3)code로 해석\n\n# import\nimport torch \nimport torch.nn as nn\n\n#데이터\nx='사진데이터'\nz='노이즈'\n\n# 모델\nD= nn.Sequential(\n    nn. Linear(784, 128),\n    nn. ReLU(),\n    nn.Linear(128, 1), nn.Sigmoid()) #sigmoid의 이유는 D의 결과값이 참인지 거짓인지만을 판별하기 때문에 0과 1사이의 확률값으로 만든다.\n\nG= nn.Sequential(\n    nn. Linear(100, 128),\n    nn.ReLU(),\n    nn. Linear(128, 784),\n    nn.Tanh())  #Tanh는 -1~1사이로 만드는 역할인데 사실 모델이 학습하면서 자동으로 범위가 설정된다. \n\n# loss_fn\ncriterion =  nn.BCELoss() #BCELoss를 사용하는 이유는 D의 결과값이 참인지 거짓인지 판별하는 이진분류이기 때문이다.\n\n# optimizer\nd_optimizer = torch.optim.Adam(D.parameters(), lr=0.01)\ng_optimizer = torch.optim.Adam(G.parameters(), lr=0.01)\n\n# 학습\nwhile True:\n    # train D (진짜와 가짜를 구분하기)\n    loss = criterion(D(x), 1) + criterion(D(G(z)), 0)\n    loss.backward()\n    d_optimizer.step()\n    \n    # train G (가짜를 진짜처럼 만들기)\n        # *주의* G만 학습해야하고 D는 학습하면 안된다.\n    loss = criterion(D(G(z)),1)\n    loss.backward() \n    g_optimizer.step()"
-  },
-  {
-    "objectID": "posts/GAN/GAN.html#몇가지-참고사항",
-    "href": "posts/GAN/GAN.html#몇가지-참고사항",
-    "title": "GAN",
-    "section": "몇가지 참고사항",
-    "text": "몇가지 참고사항\n\n** log(1-D(G(z)))를 최소화하는 것이 아닌 log(D(G(z)))를 최대화 해야하는 이유 **\nG는 초반에 형편없는 이미지를 만들게 되고 D에 넣었을 때 당연히 거짓이라고 확신하기 때문에 결과 값이 0에 가깝게 나타난다.\n0에 가까운 결과값을 log함수에 넣게되면 기울기가 작게 나타나게 된다.(아래 1번 그래프 참고)\nG의 형편없는 그림을 학습하는 상황을 빨리 벗어나기 위해서는 기울기를 크게 나타나야 한다.(아래 2번 그래프 처럼)\n기울기를 크게 해주기위해서는 식을 log(1-x)를 최소화 하는것이 아닌 log(x)를 최대화하는 것으로 바꾸는 것이다.\n\n\n\n\nalt text"
+    "text": "This is a post with executable code."
   },
   {
     "objectID": "index.html",
     "href": "index.html",
     "title": "study_GAN",
     "section": "",
-    "text": "그림 그릴때 참고\n\n\n\n\n\n\n\n\n\n\n\nJan 2, 2024\n\n\n김수환\n\n\n\n\n\n\n\n\n\n\n\n\nGAN\n\n\n\n\n\n\n\n\n\n\n\nJan 2, 2024\n\n\n김수환\n\n\n\n\n\n\n\n\n\n\n\n\n전이학습\n\n\n\n\n\n\n\n\n\n\n\nJan 2, 2024\n\n\n김수환\n\n\n\n\n\n\nNo matching items"
+    "text": "Post With Code\n\n\n\n\n\n\nnews\n\n\ncode\n\n\nanalysis\n\n\n\n\n\n\n\n\n\nSep 2, 2024\n\n\nHarlow Malloc\n\n\n\n\n\n\n\n\n\n\n\n\nWelcome To My Blog\n\n\n\n\n\n\nnews\n\n\n\n\n\n\n\n\n\nAug 30, 2024\n\n\nTristan O’Malley\n\n\n\n\n\n\nNo matching items"
   }
 ]
